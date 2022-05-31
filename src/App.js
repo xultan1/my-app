@@ -77,7 +77,29 @@ function App(props) {
     window.addEventListener("scroll", reveal);
     let isMounted = true
 
-    function success(pos) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      //console.log("Latitude is :", position.coords.latitude);
+      //console.log("Longitude is :", position.coords.longitude);
+      //var crd = pos.coords;
+      if (once === true) {
+        //setSelected({lat:crd.latitude , lng:crd.longitude})
+        setSelected({lat:position.coords.latitude , lng:position.coords.longitude})
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=e897d9682efe865644ff8dbb3450d74e`)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setAddress(result.name)
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+        setOnce(false)
+      }
+    });
+
+   /* function success(pos) {
       var crd = pos.coords;
       if (once === true) {
         setSelected({lat:crd.latitude , lng:crd.longitude})
@@ -97,7 +119,7 @@ function App(props) {
       }
 
     }
-    navigator.geolocation.getCurrentPosition(success)
+    navigator.geolocation.getCurrentPosition(success)*/
 
 
     
