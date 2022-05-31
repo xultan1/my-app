@@ -79,7 +79,7 @@ function App(props) {
 
     navigator.geolocation.getCurrentPosition(function(position) {
       //console.log("Latitude is :", position.coords.latitude);
-      //console.log("Longitude is :", position.coords.longitude);
+      //console.log("Longitude is :", position.coords.longitude)t;
       //var crd = pos.coords;
       if (once === true) {
         //setSelected({lat:crd.latitude , lng:crd.longitude})
